@@ -36,3 +36,23 @@ FROM reviewers
 
 
 
+SELECT title,
+       rating,
+       CONCAT(reviewers.first_name," ",reviewers.last_name)
+       AS reviewer
+FROM reviews
+    INNER JOIN series
+        ON reviews.series_id = series.id
+    INNER JOIN reviewers
+        ON reviews.reviewer_id = reviewers.id
+ORDER BY title, rating DESC;
+
+select username,DATE_FORMAT(created_at,'%W') from users limit 5;
+
+select
+    DATE_FORMAT(created_at,'%W'),
+    COUNT(DATE_FORMAT(created_at,'%W')) as WEEKS
+from users
+GROUP BY DATE_FORMAT(created_at,'%W')
+LIMIT 1
+;
